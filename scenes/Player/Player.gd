@@ -20,12 +20,24 @@ var burrow_speed = 16*20
 var unburrow_speed = 16*20
 
 
+export var collision_mask_normal = 1|2
+export var collision_mask_burrow = 2
+
+
 onready var UndergroundSurfaceDetector = $"%UndergroundSurfaceDetector"
 onready var OvergroundSurfaceDetector = $"%OvergroundSurfaceDetector"
+onready var PlayerSprite = $Sprite
 
 
 func _ready():
 	OvergroundStatus.new().attach(self)
+
+
+func _physics_process(delta):
+	match sign(velocity.x):
+		00.0: pass
+		-1.0: PlayerSprite.flip_h = true
+		+1.0: PlayerSprite.flip_h = false
 
 
 class OvergroundStatus extends Status:
@@ -37,8 +49,10 @@ class OvergroundStatus extends Status:
 		var input = Input.get_axis("move_left", "move_right")
 		if input != 0:
 			host.velocity.x = move_toward(host.velocity.x, input * host.max_speed, host.acceleration * delta)
+			host.PlayerSprite.play("walk")
 		else:
 			host.velocity.x = move_toward(host.velocity.x, 0, host.deceleration * delta)
+			host.PlayerSprite.play("idle")
 
 		if Input.is_action_just_pressed("jump") and host.is_on_floor():
 			host.velocity.y -= host.jump_speed
@@ -67,7 +81,7 @@ class UndergroundStatus extends Status:
 
 class DigDown extends Status:
 	func _ready():
-		host.collision_mask = 0
+		host.collision_mask = host.collision_mask_burrow
 
 	func _physics_process(delta):
 		# Gravity
@@ -101,4 +115,4 @@ class DigUp extends Status:
 
 		if not host.OvergroundSurfaceDetector.get_overlapping_bodies().size():
 			OvergroundStatus.new().attach(host)
-			host.collision_mask = 1
+			host.collision_mask = host.collision_mask_normal
