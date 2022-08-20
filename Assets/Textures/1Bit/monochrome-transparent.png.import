@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/monochrome-transparent.png-26cde53e58370a3da144f90e91f16c04.stex"
+path="res://.import/monochrome-transparent.png-f86aed64098581d7da40ad4dfef61cd9.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Textures/1Bit/monochrome-transparent.png"
-dest_files=[ "res://.import/monochrome-transparent.png-26cde53e58370a3da144f90e91f16c04.stex" ]
+source_file="res://Assets/Textures/1Bit/monochrome-transparent.png"
+dest_files=[ "res://.import/monochrome-transparent.png-f86aed64098581d7da40ad4dfef61cd9.stex" ]
 
 [params]
 
