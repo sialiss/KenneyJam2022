@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://Utils/Stats/Stat.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/Player/Player.gd" type="Script" id=2]
@@ -8,15 +8,15 @@
 [ext_resource path="res://Assets/player-diving.png" type="Texture" id=6]
 
 [sub_resource type="Resource" id=10]
-resource_name = "100/100"
+resource_name = "0/100"
 script = ExtResource( 1 )
-value = 100.0
+value = 0.0
 maximum = 100.0
 
 [sub_resource type="Resource" id=11]
-resource_name = "100/100"
+resource_name = "0/100"
 script = ExtResource( 1 )
-value = 100.0
+value = 0.0
 maximum = 100.0
 
 [sub_resource type="AtlasTexture" id=14]
@@ -71,7 +71,7 @@ region = Rect2( 13, 0, 13, 16 )
 animations = [ {
 "frames": [ SubResource( 14 ), SubResource( 15 ), SubResource( 16 ), SubResource( 17 ), SubResource( 18 ) ],
 "loop": true,
-"name": "diving",
+"name": "burrowing",
 "speed": 5.0
 }, {
 "frames": [ SubResource( 6 ), SubResource( 7 ) ],
@@ -115,8 +115,7 @@ mana = SubResource( 11 )
 
 [node name="Sprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 5 )
-animation = "idle"
-frame = 1
+animation = "burrowing"
 playing = true
 
 [node name="Collision" type="CollisionShape2D" parent="."]

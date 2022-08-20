@@ -92,6 +92,9 @@ class JumpStatus extends Status:
 
 
 class UndergroundStatus extends Status:
+	func _ready():
+		host.PlayerSprite.play("idle underground")
+
 	func _physics_process(delta):
 		# Movement
 		var input = Input.get_vector("move_left", "move_right", "move_up", "move_down")
@@ -109,6 +112,7 @@ class UndergroundStatus extends Status:
 class DigDown extends Status:
 	func _ready():
 		host.collision_mask = host.collision_mask_burrow
+		host.PlayerSprite.play("burrowing")
 
 	func _physics_process(delta):
 		# Gravity
@@ -127,6 +131,9 @@ class DigDown extends Status:
 			UndergroundStatus.new().attach(host)
 
 class DigUp extends Status:
+	func _ready():
+		host.PlayerSprite.play("burrowing", true)
+
 	func _physics_process(delta):
 		# Gravity
 		host.velocity.y = move_toward(host.velocity.y, -host.unburrow_speed, host.gravity * delta)
