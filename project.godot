@@ -8,6 +8,22 @@
 
 config_version=4
 
+_global_script_classes=[ {
+"base": "Node",
+"class": "Status",
+"language": "GDScript",
+"path": "res://Utils/StatusMachina/Status.gd"
+}, {
+"base": "Reference",
+"class": "StatusMachina",
+"language": "GDScript",
+"path": "res://Utils/StatusMachina/StatusMachina.gd"
+} ]
+_global_script_class_icons={
+"Status": "",
+"StatusMachina": ""
+}
+
 [application]
 
 config/name="Kenney Jam 2022"
@@ -16,8 +32,10 @@ config/icon="res://icon.png"
 
 [display]
 
-window/size/width=256
-window/size/height=150
+window/size/width=384
+window/size/height=225
+window/size/test_width=1024
+window/size/test_height=600
 window/stretch/mode="2d"
 window/stretch/aspect="keep"
 
