@@ -30,6 +30,10 @@ config/name="Kenney Jam 2022"
 run/main_scene="res://scenes/Main.tscn"
 config/icon="res://icon.png"
 
+[debug]
+
+gdscript/warnings/unused_argument=false
+
 [display]
 
 window/size/width=384
