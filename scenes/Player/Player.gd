@@ -23,10 +23,13 @@ var unburrow_speed = 16*20
 export var collision_mask_normal = 1|2
 export var collision_mask_burrow = 2
 
-
 onready var UndergroundSurfaceDetector = $"%UndergroundSurfaceDetector"
 onready var OvergroundSurfaceDetector = $"%OvergroundSurfaceDetector"
 onready var PlayerSprite = $Sprite
+
+
+export(Resource) var health
+export(Resource) var mana
 
 
 func _ready():
