@@ -56,6 +56,8 @@ class OvergroundStatus extends Status:
 
 		if Input.is_action_just_pressed("jump") and host.is_on_floor():
 			host.velocity.y -= host.jump_speed
+		elif !host.is_on_floor():
+			host.PlayerSprite.play("jump")
 
 		host.velocity = host.move_and_slide_with_snap(host.velocity, Vector2.DOWN, Vector2.UP)
 
