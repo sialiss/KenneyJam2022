@@ -7,8 +7,8 @@ var acceleration_time = 0.1
 var acceleration = max_speed / acceleration_time
 var deceleration_time = 0.3
 var deceleration = max_speed / deceleration_time
-var gravity = 16*60 / 1
-var jump_speed = 16*20
+var gravity = 16*30 / 1
+var jump_speed = 16*15
 
 var under_max_speed = 16*15
 var under_acceleration_time = 0.1
@@ -16,8 +16,8 @@ var under_acceleration = max_speed / under_acceleration_time
 var under_deceleration_time = 0.1
 var under_deceleration = max_speed / under_deceleration_time
 
-var burrow_speed = 16*20
-var unburrow_speed = 16*20
+var burrow_speed = 16*10
+var unburrow_speed = 16*10
 
 
 export var collision_mask_normal = 1|2
@@ -60,6 +60,7 @@ class OvergroundStatus extends Status:
 		host.velocity = host.move_and_slide_with_snap(host.velocity, Vector2.DOWN, Vector2.UP)
 
 		if Input.is_action_just_pressed("jump") and host.is_on_floor():
+			host.velocity.y -= host.jump_speed
 			JumpStatus.new().attach(host)
 
 		elif Input.is_action_just_pressed("burrow"):
@@ -69,7 +70,6 @@ class OvergroundStatus extends Status:
 class JumpStatus extends Status:
 	func _ready():
 		host.PlayerSprite.play("jump")
-		host.velocity.y -= host.jump_speed
 
 	func _physics_process(delta):
 		# Gravity
