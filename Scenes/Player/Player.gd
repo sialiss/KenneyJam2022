@@ -57,15 +57,37 @@ class OvergroundStatus extends Status:
 			host.velocity.x = move_toward(host.velocity.x, 0, host.deceleration * delta)
 			host.PlayerSprite.play("idle")
 
+		host.velocity = host.move_and_slide_with_snap(host.velocity, Vector2.DOWN, Vector2.UP)
+
 		if Input.is_action_just_pressed("jump") and host.is_on_floor():
-			host.velocity.y -= host.jump_speed
-		elif !host.is_on_floor():
-			host.PlayerSprite.play("jump")
+			JumpStatus.new().attach(host)
+
+		elif Input.is_action_just_pressed("burrow"):
+			DigDown.new().attach(host)
+
+
+class JumpStatus extends Status:
+	func _ready():
+		host.PlayerSprite.play("jump")
+		host.velocity.y -= host.jump_speed
+
+	func _physics_process(delta):
+		# Gravity
+		host.velocity.y += host.gravity * delta
+
+		# Movement
+		var input = Input.get_axis("move_left", "move_right")
+		if input != 0:
+			host.velocity.x = move_toward(host.velocity.x, input * host.max_speed, host.acceleration * delta)
+		else:
+			host.velocity.x = move_toward(host.velocity.x, 0, host.deceleration * delta)
 
 		host.velocity = host.move_and_slide_with_snap(host.velocity, Vector2.DOWN, Vector2.UP)
 
+		if host.is_on_floor():
+			OvergroundStatus.new().attach(host)
 
-		if Input.is_action_just_pressed("burrow"):
+		elif Input.is_action_just_pressed("burrow"):
 			DigDown.new().attach(host)
 
 
@@ -119,5 +141,5 @@ class DigUp extends Status:
 		host.velocity = host.move_and_slide(host.velocity, Vector2.UP)
 
 		if not host.OvergroundSurfaceDetector.get_overlapping_bodies().size():
-			OvergroundStatus.new().attach(host)
+			JumpStatus.new().attach(host)
 			host.collision_mask = host.collision_mask_normal
