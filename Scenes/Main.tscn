@@ -17,10 +17,8 @@ position = Vector2( 239, 62 )
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = -1
 
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
-margin_right = 384.0
-margin_bottom = 225.0
-color = Color( 0.117647, 0.113725, 0.223529, 1 )
-
-[node name="Enemy" parent="." instance=ExtResource( 3 )]
-position = Vector2( 383, 99 )
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 3 )
+expand = true
