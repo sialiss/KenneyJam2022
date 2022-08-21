@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=2]
+[gd_scene load_steps=40 format=2]
 
 [ext_resource path="res://Utils/Stats/Stat.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/Player/Player.gd" type="Script" id=2]
@@ -49,6 +49,7 @@ tracks/1/keys = {
 [sub_resource type="Animation" id=24]
 resource_name = "dive"
 length = 0.5
+step = 0.05
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame_coords")
 tracks/0/interp = 1
@@ -56,7 +57,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
+"times": PoolRealArray( 0, 0.05, 0.1, 0.15, 0.2 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
 "update": 1,
 "values": [ Vector2( 0, 3 ), Vector2( 1, 3 ), Vector2( 2, 3 ), Vector2( 3, 3 ), Vector2( 4, 3 ) ]
@@ -114,6 +115,7 @@ tracks/0/keys = {
 [sub_resource type="Animation" id=29]
 resource_name = "redive"
 length = 0.5
+step = 0.05
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame_coords")
 tracks/0/interp = 1
@@ -121,7 +123,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
+"times": PoolRealArray( 0, 0.05, 0.1, 0.15, 0.2 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
 "update": 1,
 "values": [ Vector2( 4, 3 ), Vector2( 3, 3 ), Vector2( 2, 3 ), Vector2( 1, 3 ), Vector2( 0, 3 ) ]
@@ -170,7 +172,6 @@ animation = "walk"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=39]
 switch_mode = 2
-auto_advance = true
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=40]
 
@@ -180,28 +181,31 @@ auto_advance = true
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=43]
 switch_mode = 2
-auto_advance = true
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=44]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=45]
 
+[sub_resource type="AnimationNodeStateMachineTransition" id=50]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=51]
+
 [sub_resource type="AnimationNodeStateMachine" id=21]
 states/dive/node = SubResource( 30 )
 states/dive/position = Vector2( 392, 34 )
 states/idle/node = SubResource( 32 )
-states/idle/position = Vector2( 546, 51 )
+states/idle/position = Vector2( 583, 34 )
 "states/idle underground/node" = SubResource( 31 )
 "states/idle underground/position" = Vector2( 206, 116 )
 states/jump/node = SubResource( 33 )
-states/jump/position = Vector2( 546, 181 )
+states/jump/position = Vector2( 573, 213 )
 states/redive/node = SubResource( 34 )
-states/redive/position = Vector2( 334, 207 )
+states/redive/position = Vector2( 392, 213 )
 states/walk/node = SubResource( 35 )
-states/walk/position = Vector2( 735, 116 )
-transitions = [ "idle", "jump", SubResource( 36 ), "idle", "walk", SubResource( 37 ), "idle", "dive", SubResource( 38 ), "dive", "idle underground", SubResource( 39 ), "jump", "idle", SubResource( 40 ), "walk", "idle", SubResource( 41 ), "idle underground", "redive", SubResource( 42 ), "redive", "jump", SubResource( 43 ), "jump", "walk", SubResource( 44 ), "walk", "jump", SubResource( 45 ) ]
+states/walk/position = Vector2( 748, 116 )
+transitions = [ "idle", "jump", SubResource( 36 ), "idle", "walk", SubResource( 37 ), "idle", "dive", SubResource( 38 ), "dive", "idle underground", SubResource( 39 ), "jump", "idle", SubResource( 40 ), "walk", "idle", SubResource( 41 ), "idle underground", "redive", SubResource( 42 ), "redive", "jump", SubResource( 43 ), "jump", "walk", SubResource( 44 ), "walk", "jump", SubResource( 45 ), "dive", "redive", SubResource( 50 ), "redive", "dive", SubResource( 51 ) ]
 start_node = "idle"
-graph_offset = Vector2( -14, -109 )
+graph_offset = Vector2( -64, -28 )
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=22]
 
