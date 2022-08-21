@@ -30,6 +30,7 @@ onready var UndergroundSurfaceDetector = $"%UndergroundSurfaceDetector"
 onready var OvergroundSurfaceDetector = $"%OvergroundSurfaceDetector"
 onready var PlayerSprite = $Sprite
 onready var AnimTree = $AnimationTree
+onready var FlowerSeedTimer = $FlowerSeedTimer
 onready var Crosshair = $"%Crosshair"
 
 onready var Playback: AnimationNodeStateMachinePlayback = AnimTree.get("parameters/playback")
@@ -41,7 +42,7 @@ export(Resource) var mana
 func _ready():
 	OvergroundStatus.new().attach(self)
 	Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
-
+	FlowerSeedTimer.connect("timeout", self, "spawn_flowers")
 
 func _process(delta):
 	Crosshair.global_position = get_global_mouse_position()
@@ -62,13 +63,24 @@ func cast_spells():
 		attack_spell.apply_central_impulse(global_position.direction_to(Crosshair.global_position) * 300)
 		Spawner.spawn(attack_spell)
 
-	if Input.is_action_just_pressed("cast_secondary"):
-		var spawn_flowers_spell = SpawnFlowersSpellScene.instance()
-		spawn_flowers_spell.global_position = global_position
-		Spawner.spawn(spawn_flowers_spell)
+
+func spawn_flowers():
+	var spawn_flowers_spell = SpawnFlowersSpellScene.instance()
+	spawn_flowers_spell.global_position = global_position
+	Spawner.spawn(spawn_flowers_spell)
+
+func start_flower_timer():
+	if FlowerSeedTimer.is_stopped():
+		FlowerSeedTimer.start()
+
+func stop_flower_timer():
+	FlowerSeedTimer.stop()
 
 
 class OvergroundStatus extends Status:
+	func _ready():
+		host.start_flower_timer()
+
 	func _physics_process(delta):
 		# Gravity
 		host.velocity.y += host.gravity * delta
@@ -96,6 +108,7 @@ class OvergroundStatus extends Status:
 
 class JumpStatus extends Status:
 	func _ready():
+		host.start_flower_timer()
 		host.Playback.travel("jump")
 
 	func _physics_process(delta):
@@ -122,6 +135,7 @@ class JumpStatus extends Status:
 
 class UndergroundStatus extends Status:
 	func _ready():
+		host.stop_flower_timer()
 		host.Playback.travel("idle underground")
 
 	func _physics_process(delta):
@@ -140,6 +154,7 @@ class UndergroundStatus extends Status:
 
 class DigDown extends Status:
 	func _ready():
+		host.stop_flower_timer()
 		host.collision_mask = host.collision_mask_burrow
 		host.Playback.travel("dive")
 
@@ -161,6 +176,7 @@ class DigDown extends Status:
 
 class DigUp extends Status:
 	func _ready():
+		host.stop_flower_timer()
 		host.Playback.travel("redive")
 
 	func _physics_process(delta):

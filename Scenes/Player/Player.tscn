@@ -10,14 +10,14 @@
 [sub_resource type="Resource" id=46]
 resource_name = "100/100"
 script = ExtResource( 1 )
-value = 100.0
 maximum = 100.0
+value = 100.0
 
 [sub_resource type="Resource" id=11]
 resource_name = "100/100"
 script = ExtResource( 1 )
-value = 100.0
 maximum = 100.0
+value = 100.0
 
 [sub_resource type="Animation" id=23]
 length = 0.001
@@ -277,3 +277,5 @@ follow_viewport_enable = true
 unique_name_in_owner = true
 position = Vector2( 49, 0 )
 texture = ExtResource( 5 )
+
+[node name="FlowerSeedTimer" type="Timer" parent="."]
