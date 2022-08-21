@@ -1,6 +1,6 @@
 extends Node2D
 
-var menu_scene = load("res://scenes/Menu/Menu.tscn")
+var menu_scene = load("res://Scenes/Menu/Menu.tscn")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
