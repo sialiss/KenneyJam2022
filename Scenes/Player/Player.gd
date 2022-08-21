@@ -44,6 +44,9 @@ func _ready():
 	Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
 	FlowerSeedTimer.connect("timeout", self, "spawn_flowers")
 
+func _exit_tree():
+	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+
 func _process(delta):
 	Crosshair.global_position = get_global_mouse_position()
 	Crosshair.global_rotation = lerp_angle(Crosshair.global_rotation, self.get_angle_to(Crosshair.global_position), 20*delta)

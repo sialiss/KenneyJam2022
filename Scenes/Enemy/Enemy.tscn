@@ -1,13 +1,14 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Assets/Textures/1BitPlatformer/monochrome_tilemap_transparent_packed.png" type="Texture" id=1]
-[ext_resource path="res://Scenes/Enemy/Enemy.gd" type="Script" id=2]
+[ext_resource path="res://Scenes/Enemy/Helifly.gd" type="Script" id=2]
 [ext_resource path="res://Utils/Stats/Stat.gd" type="Script" id=3]
+[ext_resource path="res://Scenes/Enemy/Attack/EnemyAttack.tscn" type="PackedScene" id=4]
 
 [sub_resource type="Resource" id=4]
 script = ExtResource( 3 )
-value = 20.0
 maximum = 20.0
+value = 20.0
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 6.08276
@@ -49,6 +50,7 @@ collision_layer = 4096
 collision_mask = 259
 script = ExtResource( 2 )
 health = SubResource( 4 )
+AttackSpellScene = ExtResource( 4 )
 
 [node name="Collision" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
@@ -63,3 +65,11 @@ frame = 380
 autoplay = "idle"
 anims/RESET = SubResource( 2 )
 anims/idle = SubResource( 3 )
+
+[node name="AttackTimer" type="Timer" parent="."]
+wait_time = 2.0
+autostart = true
+
+[node name="LineOfSight" type="RayCast2D" parent="."]
+enabled = true
+collision_mask = 259
