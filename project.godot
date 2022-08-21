@@ -49,6 +49,7 @@ Spawner="*res://Utils/Spawner/Spawner.gd"
 [debug]
 
 gdscript/warnings/unused_argument=false
+gdscript/warnings/return_value_discarded=false
 
 [display]
 
