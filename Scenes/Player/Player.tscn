@@ -4,7 +4,7 @@
 [ext_resource path="res://Scenes/Player/Player.gd" type="Script" id=2]
 [ext_resource path="res://Assets/all player animations.png" type="Texture" id=3]
 
-[sub_resource type="Resource" id=10]
+[sub_resource type="Resource" id=46]
 resource_name = "100/100"
 script = ExtResource( 1 )
 value = 100.0
@@ -216,7 +216,7 @@ b = Vector2( 6, 0 )
 [node name="Player" type="KinematicBody2D"]
 collision_layer = 256
 script = ExtResource( 2 )
-health = SubResource( 10 )
+health = SubResource( 46 )
 mana = SubResource( 11 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
