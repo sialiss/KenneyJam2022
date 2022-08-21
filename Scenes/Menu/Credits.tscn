@@ -80,20 +80,20 @@ theme = ExtResource( 4 )
 text = "Igrochka"
 
 [node name="RichTextLabel" type="RichTextLabel" parent="."]
-margin_left = 32.0
-margin_top = 27.0
-margin_right = 202.0
-margin_bottom = 154.0
+margin_left = 16.0
+margin_top = 26.0
+margin_right = 205.0
+margin_bottom = 112.0
 theme = ExtResource( 4 )
 bbcode_enabled = true
 bbcode_text = "[right]
-Gamedesign and art:
+Gamedesign, art, music:
 Programming:
-Assets and music:"
+Assets:"
 text = "
-Gamedesign and art:
+Gamedesign, art, music:
 Programming:
-Assets and music:"
+Assets:"
 
 [node name="RichTextLabel2" type="RichTextLabel" parent="."]
 margin_left = 688.0
