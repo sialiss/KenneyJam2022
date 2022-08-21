@@ -4,7 +4,7 @@ var game_scene = load("res://Scenes/Main/Main.tscn")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	# $MenuMusic.play()
+	$MenuMusic.play()
 	$Credits.hide()
 
 func show_message(text):
@@ -12,6 +12,7 @@ func show_message(text):
 	$Message.show()
 
 func _on_StartButton_pressed():
+	$MenuMusic.stop()
 	get_tree().change_scene_to(game_scene)
 
 func _on_CreditsButton_pressed():

@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Assets/theme.tres" type="Theme" id=1]
 [ext_resource path="res://Scenes/Menu/Menu.gd" type="Script" id=2]
 [ext_resource path="res://Assets/all player animations.png" type="Texture" id=3]
 [ext_resource path="res://Assets/menu.png" type="Texture" id=4]
 [ext_resource path="res://Scenes/Menu/Credits.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Sounds/some2.mp3" type="AudioStream" id=6]
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 3 )
@@ -36,6 +37,7 @@ texture = ExtResource( 4 )
 position = Vector2( 52, 163 )
 scale = Vector2( 4, 4 )
 frames = SubResource( 3 )
+frame = 1
 playing = true
 
 [node name="StartButton" type="Button" parent="."]
@@ -56,6 +58,10 @@ text = "Credits"
 
 [node name="Credits" parent="." instance=ExtResource( 5 )]
 visible = false
+
+[node name="MenuMusic" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 6 )
+volume_db = -5.0
 
 [connection signal="pressed" from="StartButton" to="." method="_on_StartButton_pressed"]
 [connection signal="pressed" from="CreditsButton" to="." method="_on_CreditsButton_pressed"]
