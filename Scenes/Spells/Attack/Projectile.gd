@@ -1,6 +1,6 @@
 extends RigidBody2D
 
-export(float) var damage = 1
+export(float) var damage = 1.0
 
 
 func _ready():
