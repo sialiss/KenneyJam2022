@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Assets/theme.tres" type="Theme" id=1]
 [ext_resource path="res://Scenes/Menu/Menu.gd" type="Script" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://Assets/menu.png" type="Texture" id=4]
 [ext_resource path="res://Scenes/Menu/Credits.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Sounds/some2.mp3" type="AudioStream" id=6]
+[ext_resource path="res://Assets/Fonts/Kenney Pixel.ttf" type="DynamicFontData" id=7]
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 3 )
@@ -23,6 +24,12 @@ animations = [ {
 "speed": 2.0
 } ]
 
+[sub_resource type="DynamicFont" id=4]
+size = 75
+outline_size = 2
+outline_color = Color( 0.458824, 0.654902, 0.262745, 1 )
+font_data = ExtResource( 7 )
+
 [node name="Menu" type="CanvasLayer"]
 script = ExtResource( 2 )
 
@@ -30,14 +37,16 @@ script = ExtResource( 2 )
 self_modulate = Color( 0.827451, 0.827451, 0.827451, 1 )
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_right = 640.0
+margin_bottom = 375.0
 rect_scale = Vector2( 0.374673, 0.375123 )
 texture = ExtResource( 4 )
+stretch_mode = 5
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
-position = Vector2( 52, 163 )
-scale = Vector2( 4, 4 )
+position = Vector2( 61, 177.846 )
+scale = Vector2( 4.76923, 4.76923 )
 frames = SubResource( 3 )
-frame = 1
 playing = true
 
 [node name="StartButton" type="Button" parent="."]
@@ -62,6 +71,15 @@ visible = false
 [node name="MenuMusic" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 6 )
 volume_db = -5.0
+
+[node name="Label" type="Label" parent="."]
+margin_left = 101.0
+margin_top = 39.0
+margin_right = 340.0
+margin_bottom = 96.0
+custom_colors/font_color = Color( 0.968627, 0.898039, 0.0117647, 1 )
+custom_fonts/font = SubResource( 4 )
+text = "Flowerize"
 
 [connection signal="pressed" from="StartButton" to="." method="_on_StartButton_pressed"]
 [connection signal="pressed" from="CreditsButton" to="." method="_on_CreditsButton_pressed"]
