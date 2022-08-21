@@ -24,6 +24,7 @@ export(int, LAYERS_2D_PHYSICS) var collision_mask_normal = 0
 export(int, LAYERS_2D_PHYSICS) var collision_mask_burrow = 0
 
 export(PackedScene) var SpawnFlowersSpellScene
+export(PackedScene) var AttackSpellScene
 
 onready var UndergroundSurfaceDetector = $"%UndergroundSurfaceDetector"
 onready var OvergroundSurfaceDetector = $"%OvergroundSurfaceDetector"
@@ -38,7 +39,6 @@ export(Resource) var mana
 
 
 func _ready():
-	print(collision_mask_burrow)
 	OvergroundStatus.new().attach(self)
 	Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
 
@@ -53,6 +53,19 @@ func _physics_process(delta):
 		00.0: pass
 		-1.0: PlayerSprite.flip_h = true
 		+1.0: PlayerSprite.flip_h = false
+
+
+func cast_spells():
+	if Input.is_action_just_pressed("cast_primary"):
+		var attack_spell = AttackSpellScene.instance()
+		attack_spell.global_position = global_position
+		attack_spell.apply_central_impulse(global_position.direction_to(Crosshair.global_position) * 300)
+		Spawner.spawn(attack_spell)
+
+	if Input.is_action_just_pressed("cast_secondary"):
+		var spawn_flowers_spell = SpawnFlowersSpellScene.instance()
+		spawn_flowers_spell.global_position = global_position
+		Spawner.spawn(spawn_flowers_spell)
 
 
 class OvergroundStatus extends Status:
@@ -71,10 +84,7 @@ class OvergroundStatus extends Status:
 
 		host.velocity = host.move_and_slide_with_snap(host.velocity, Vector2.DOWN, Vector2.UP)
 
-		if Input.is_action_just_pressed("cast_primary"):
-			var spawn_flowers_spell = host.SpawnFlowersSpellScene.instance()
-			spawn_flowers_spell.global_position = host.global_position
-			Spawner.spawn(spawn_flowers_spell)
+		host.cast_spells()
 
 		if Input.is_action_just_pressed("jump") and host.is_on_floor():
 			host.velocity.y -= host.jump_speed
@@ -100,6 +110,8 @@ class JumpStatus extends Status:
 			host.velocity.x = move_toward(host.velocity.x, 0, host.deceleration * delta)
 
 		host.velocity = host.move_and_slide_with_snap(host.velocity, Vector2.DOWN, Vector2.UP)
+
+		host.cast_spells()
 
 		if host.is_on_floor():
 			OvergroundStatus.new().attach(host)

@@ -1,6 +1,13 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Assets/Textures/1BitPlatformer/monochrome_tilemap_transparent_packed.png" type="Texture" id=1]
+[ext_resource path="res://Scenes/Enemy/Enemy.gd" type="Script" id=2]
+[ext_resource path="res://Utils/Stats/Stat.gd" type="Script" id=3]
+
+[sub_resource type="Resource" id=4]
+script = ExtResource( 3 )
+value = 20.0
+maximum = 20.0
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 6.08276
@@ -40,6 +47,8 @@ tracks/0/keys = {
 [node name="Enemy" type="KinematicBody2D"]
 collision_layer = 4096
 collision_mask = 259
+script = ExtResource( 2 )
+health = SubResource( 4 )
 
 [node name="Collision" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )

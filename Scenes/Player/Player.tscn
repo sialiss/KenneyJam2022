@@ -1,10 +1,11 @@
-[gd_scene load_steps=36 format=2]
+[gd_scene load_steps=37 format=2]
 
 [ext_resource path="res://Utils/Stats/Stat.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/Player/Player.gd" type="Script" id=2]
 [ext_resource path="res://Assets/all player animations.png" type="Texture" id=3]
-[ext_resource path="res://Scenes/Flowers/SpawnFlowersSpell.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Scenes/Spells/Flowers/SpawnFlowersSpell.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Assets/Textures/Crosshair.png" type="Texture" id=5]
+[ext_resource path="res://Scenes/Spells/Attack/Projectile.tscn" type="PackedScene" id=6]
 
 [sub_resource type="Resource" id=46]
 resource_name = "100/100"
@@ -222,6 +223,7 @@ script = ExtResource( 2 )
 collision_mask_normal = 3
 collision_mask_burrow = 2
 SpawnFlowersSpellScene = ExtResource( 4 )
+AttackSpellScene = ExtResource( 6 )
 health = SubResource( 46 )
 mana = SubResource( 11 )
 
