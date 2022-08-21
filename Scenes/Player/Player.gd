@@ -23,6 +23,8 @@ var unburrow_speed = 16*10
 export var collision_mask_normal = 1|2
 export var collision_mask_burrow = 2
 
+export(PackedScene) var SpawnFlowersSpellScene
+
 onready var UndergroundSurfaceDetector = $"%UndergroundSurfaceDetector"
 onready var OvergroundSurfaceDetector = $"%OvergroundSurfaceDetector"
 onready var PlayerSprite = $Sprite
@@ -61,6 +63,11 @@ class OvergroundStatus extends Status:
 			host.Playback.travel("idle")
 
 		host.velocity = host.move_and_slide_with_snap(host.velocity, Vector2.DOWN, Vector2.UP)
+
+		if Input.is_action_just_pressed("cast_primary"):
+			var spawn_flowers_spell = host.SpawnFlowersSpellScene.instance()
+			spawn_flowers_spell.global_position = host.global_position
+			Spawner.spawn(spawn_flowers_spell)
 
 		if Input.is_action_just_pressed("jump") and host.is_on_floor():
 			host.velocity.y -= host.jump_speed

@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Scenes/Flowers/SpawnFlowersSpell.gd" type="Script" id=1]
+[ext_resource path="res://Scenes/Flowers/FlowerSeed.tscn" type="PackedScene" id=2]
+
+[node name="SpawnFlowersSpell" type="Node2D"]
+script = ExtResource( 1 )
+amount = 10
+FlowerSeedScene = ExtResource( 2 )
+max_angle_degrees = 66.136
+min_force = 50.0
+max_force = 100.0
+
+[node name="Seeds" type="Node2D" parent="."]
