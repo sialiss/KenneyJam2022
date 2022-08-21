@@ -1,6 +1,5 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=8 format=2]
 
-[ext_resource path="res://Assets/Fonts/Xolonium-Regular.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://Scenes/Menu/Credits.gd" type="Script" id=2]
 [ext_resource path="res://Assets/menu.png" type="Texture" id=3]
 [ext_resource path="res://Assets/theme.tres" type="Theme" id=4]
@@ -21,10 +20,6 @@ animations = [ {
 "name": "default",
 "speed": 2.0
 } ]
-
-[sub_resource type="DynamicFont" id=5]
-size = 48
-font_data = ExtResource( 1 )
 
 [node name="Credits" type="CanvasLayer"]
 script = ExtResource( 2 )
@@ -94,16 +89,6 @@ text = "
 Gamedesign, art, music:
 Programming:
 Assets:"
-
-[node name="RichTextLabel2" type="RichTextLabel" parent="."]
-margin_left = 688.0
-margin_top = 160.0
-margin_right = 824.0
-margin_bottom = 224.0
-rect_pivot_offset = Vector2( -48, 48 )
-custom_fonts/normal_font = SubResource( 5 )
-bbcode_text = ", och"
-text = ", och"
 
 [node name="RichTextLabel3" type="RichTextLabel" parent="."]
 margin_left = 210.0
