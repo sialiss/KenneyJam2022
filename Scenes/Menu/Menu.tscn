@@ -26,6 +26,7 @@ animations = [ {
 script = ExtResource( 2 )
 
 [node name="TextureRect" type="TextureRect" parent="."]
+self_modulate = Color( 0.827451, 0.827451, 0.827451, 1 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 rect_scale = Vector2( 0.374673, 0.375123 )
@@ -35,7 +36,6 @@ texture = ExtResource( 4 )
 position = Vector2( 52, 163 )
 scale = Vector2( 4, 4 )
 frames = SubResource( 3 )
-frame = 1
 playing = true
 
 [node name="StartButton" type="Button" parent="."]

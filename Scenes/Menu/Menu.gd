@@ -1,6 +1,6 @@
 extends CanvasLayer
 
-var game_scene = load("res://scenes/Main.tscn")
+var game_scene = load("res://scenes/Main/Main.tscn")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

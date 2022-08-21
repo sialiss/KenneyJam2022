@@ -43,7 +43,6 @@ self_modulate = Color( 0.615686, 0.615686, 0.615686, 1 )
 position = Vector2( 52, 163 )
 scale = Vector2( 4, 4 )
 frames = SubResource( 6 )
-frame = 1
 playing = true
 
 [node name="GitHub" type="LinkButton" parent="."]
@@ -65,9 +64,9 @@ text = "Camellia"
 
 [node name="Kenney" type="LinkButton" parent="."]
 margin_left = 211.0
-margin_top = 88.0
+margin_top = 87.0
 margin_right = 283.0
-margin_bottom = 108.0
+margin_bottom = 107.0
 focus_mode = 2
 theme = ExtResource( 4 )
 text = "Kenney"
