@@ -26,6 +26,7 @@ export(int, LAYERS_2D_PHYSICS) var collision_mask_burrow = 0
 export(PackedScene) var SpawnFlowersSpellScene
 export(PackedScene) var AttackSpellScene
 
+onready var UndergroundDetector = $"%UndergroundDetector"
 onready var UndergroundSurfaceDetector = $"%UndergroundSurfaceDetector"
 onready var OvergroundSurfaceDetector = $"%OvergroundSurfaceDetector"
 onready var PlayerSprite = $Sprite
@@ -80,6 +81,10 @@ func stop_flower_timer():
 	FlowerSeedTimer.stop()
 
 
+func is_underground():
+	return UndergroundDetector.get_overlapping_bodies().size()
+
+
 class OvergroundStatus extends Status:
 	func _ready():
 		host.start_flower_timer()
@@ -105,7 +110,7 @@ class OvergroundStatus extends Status:
 			host.velocity.y -= host.jump_speed
 			JumpStatus.new().attach(host)
 
-		elif Input.is_action_just_pressed("burrow"):
+		elif Input.is_action_pressed("burrow"):
 			DigDown.new().attach(host)
 
 
@@ -132,7 +137,7 @@ class JumpStatus extends Status:
 		if host.is_on_floor():
 			OvergroundStatus.new().attach(host)
 
-		elif Input.is_action_just_pressed("burrow"):
+		if Input.is_action_pressed("burrow"):
 			DigDown.new().attach(host)
 
 
@@ -151,19 +156,25 @@ class UndergroundStatus extends Status:
 
 		host.velocity = host.move_and_slide(host.velocity, Vector2.UP)
 
-		if not host.UndergroundSurfaceDetector.get_overlapping_bodies().size():
-			DigUp.new().attach(host)
+		if not host.is_underground() and not host.UndergroundSurfaceDetector.get_overlapping_bodies().size() and not host.UndergroundSurfaceDetector.get_overlapping_bodies().size():
+			if Input.is_action_pressed("burrow"):
+				DigDown.new().attach(host)
+			else:
+				DigUp.new().attach(host)
 
 
 class DigDown extends Status:
 	func _ready():
 		host.stop_flower_timer()
 		host.collision_mask = host.collision_mask_burrow
-		host.Playback.travel("dive")
+		host.Playback.travel("idle underground")
 
 	func _physics_process(delta):
 		# Gravity
-		host.velocity.y = move_toward(host.velocity.y, host.burrow_speed, host.gravity * delta)
+		if host.is_underground():
+			host.velocity.y = move_toward(host.velocity.y, host.burrow_speed, host.gravity * delta)
+		else:
+			host.velocity.y += host.gravity * delta
 
 		# Movement
 		var input = Input.get_axis("move_left", "move_right")
@@ -174,13 +185,16 @@ class DigDown extends Status:
 
 		host.velocity = host.move_and_slide(host.velocity, Vector2.UP)
 
-		if host.UndergroundSurfaceDetector.get_overlapping_bodies().size():
+		if host.is_underground() and host.UndergroundSurfaceDetector.get_overlapping_bodies().size():
 			UndergroundStatus.new().attach(host)
+
+		elif not Input.is_action_pressed("burrow"):
+			DigUp.new().attach(host)
 
 class DigUp extends Status:
 	func _ready():
 		host.stop_flower_timer()
-		host.Playback.travel("redive")
+		host.Playback.travel("jump")
 
 	func _physics_process(delta):
 		# Gravity
@@ -195,6 +209,9 @@ class DigUp extends Status:
 
 		host.velocity = host.move_and_slide(host.velocity, Vector2.UP)
 
-		if not host.OvergroundSurfaceDetector.get_overlapping_bodies().size():
+		if Input.is_action_pressed("burrow"):
+			DigDown.new().attach(host)
+
+		elif not host.is_underground() and not host.OvergroundSurfaceDetector.get_overlapping_bodies().size():
 			JumpStatus.new().attach(host)
 			host.collision_mask = host.collision_mask_normal

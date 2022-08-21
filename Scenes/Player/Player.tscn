@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=2]
+[gd_scene load_steps=38 format=2]
 
 [ext_resource path="res://Utils/Stats/Stat.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/Player/Player.gd" type="Script" id=2]
@@ -201,6 +201,7 @@ states/walk/node = SubResource( 35 )
 states/walk/position = Vector2( 735, 116 )
 transitions = [ "idle", "jump", SubResource( 36 ), "idle", "walk", SubResource( 37 ), "idle", "dive", SubResource( 38 ), "dive", "idle underground", SubResource( 39 ), "jump", "idle", SubResource( 40 ), "walk", "idle", SubResource( 41 ), "idle underground", "redive", SubResource( 42 ), "redive", "jump", SubResource( 43 ), "jump", "walk", SubResource( 44 ), "walk", "jump", SubResource( 45 ) ]
 start_node = "idle"
+graph_offset = Vector2( -14, -109 )
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=22]
 
@@ -208,13 +209,14 @@ start_node = "idle"
 radius = 4.0
 height = 8.0
 
-[sub_resource type="SegmentShape2D" id=3]
-a = Vector2( -6, 0 )
-b = Vector2( 6, 0 )
+[sub_resource type="CircleShape2D" id=48]
+radius = 2.0
 
-[sub_resource type="SegmentShape2D" id=4]
-a = Vector2( -6, 0 )
-b = Vector2( 6, 0 )
+[sub_resource type="CircleShape2D" id=49]
+radius = 2.0
+
+[sub_resource type="CircleShape2D" id=47]
+radius = 2.0
 
 [node name="Player" type="KinematicBody2D" groups=["player"]]
 collision_layer = 256
@@ -256,19 +258,31 @@ current = true
 
 [node name="UndergroundSurfaceDetector" type="Area2D" parent="."]
 unique_name_in_owner = true
-visible = false
 position = Vector2( 0, -8 )
+collision_layer = 0
+collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="UndergroundSurfaceDetector"]
-shape = SubResource( 3 )
+position = Vector2( 0, 2 )
+shape = SubResource( 48 )
 
 [node name="OvergroundSurfaceDetector" type="Area2D" parent="."]
 unique_name_in_owner = true
-visible = false
 position = Vector2( 0, 8 )
+collision_layer = 0
+collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="OvergroundSurfaceDetector"]
-shape = SubResource( 4 )
+position = Vector2( 0, -2 )
+shape = SubResource( 49 )
+
+[node name="UndergroundDetector" type="Area2D" parent="."]
+unique_name_in_owner = true
+collision_layer = 0
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="UndergroundDetector"]
+shape = SubResource( 47 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 follow_viewport_enable = true
