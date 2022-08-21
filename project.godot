@@ -28,12 +28,18 @@ _global_script_classes=[ {
 "class": "StatusMachina",
 "language": "GDScript",
 "path": "res://Utils/StatusMachina/StatusMachina.gd"
+}, {
+"base": "Reference",
+"class": "Ticker",
+"language": "GDScript",
+"path": "res://Utils/Ticker/Ticker.gd"
 } ]
 _global_script_class_icons={
 "Enemy": "",
 "Stat": "",
 "Status": "",
-"StatusMachina": ""
+"StatusMachina": "",
+"Ticker": ""
 }
 
 [application]
@@ -57,6 +63,7 @@ window/size/width=384
 window/size/height=225
 window/size/test_width=1024
 window/size/test_height=600
+window/handheld/orientation="sensor_landscape"
 window/stretch/mode="2d"
 window/stretch/aspect="keep"
 
@@ -137,9 +144,7 @@ jump={
 }
 burrow={
 "deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":83,"unicode":0,"echo":false,"script":null)
-, Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":1,"pressure":0.0,"pressed":false,"script":null)
-, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":16777234,"unicode":0,"echo":false,"script":null)
+"events": [ Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":1,"pressure":0.0,"pressed":false,"script":null)
 , Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":16777237,"unicode":0,"echo":false,"script":null)
  ]
 }
