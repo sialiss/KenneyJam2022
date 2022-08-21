@@ -235,12 +235,12 @@ active = true
 parameters/playback = SubResource( 22 )
 
 [node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 0.5, 0 )
 texture = ExtResource( 3 )
 hframes = 5
 vframes = 4
 
 [node name="Collision" type="CollisionShape2D" parent="."]
-visible = false
 shape = SubResource( 20 )
 
 [node name="Camera" type="Camera2D" parent="."]

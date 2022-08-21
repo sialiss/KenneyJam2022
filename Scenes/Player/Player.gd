@@ -26,6 +26,9 @@ export var collision_mask_burrow = 2
 onready var UndergroundSurfaceDetector = $"%UndergroundSurfaceDetector"
 onready var OvergroundSurfaceDetector = $"%OvergroundSurfaceDetector"
 onready var PlayerSprite = $Sprite
+onready var AnimTree = $AnimationTree
+
+onready var Playback: AnimationNodeStateMachinePlayback = AnimTree.get("parameters/playback")
 
 
 export(Resource) var health
@@ -52,10 +55,10 @@ class OvergroundStatus extends Status:
 		var input = Input.get_axis("move_left", "move_right")
 		if input != 0:
 			host.velocity.x = move_toward(host.velocity.x, input * host.max_speed, host.acceleration * delta)
-			host.PlayerSprite.play("walk")
+			host.Playback.travel("walk")
 		else:
 			host.velocity.x = move_toward(host.velocity.x, 0, host.deceleration * delta)
-			host.PlayerSprite.play("idle")
+			host.Playback.travel("idle")
 
 		host.velocity = host.move_and_slide_with_snap(host.velocity, Vector2.DOWN, Vector2.UP)
 
@@ -69,7 +72,7 @@ class OvergroundStatus extends Status:
 
 class JumpStatus extends Status:
 	func _ready():
-		host.PlayerSprite.play("jump")
+		host.Playback.travel("jump")
 
 	func _physics_process(delta):
 		# Gravity
@@ -93,7 +96,7 @@ class JumpStatus extends Status:
 
 class UndergroundStatus extends Status:
 	func _ready():
-		host.PlayerSprite.play("idle underground")
+		host.Playback.travel("idle underground")
 
 	func _physics_process(delta):
 		# Movement
@@ -112,7 +115,7 @@ class UndergroundStatus extends Status:
 class DigDown extends Status:
 	func _ready():
 		host.collision_mask = host.collision_mask_burrow
-		host.PlayerSprite.play("burrowing")
+		host.Playback.travel("dive")
 
 	func _physics_process(delta):
 		# Gravity
@@ -132,7 +135,7 @@ class DigDown extends Status:
 
 class DigUp extends Status:
 	func _ready():
-		host.PlayerSprite.play("burrowing", true)
+		host.Playback.travel("redive")
 
 	func _physics_process(delta):
 		# Gravity
