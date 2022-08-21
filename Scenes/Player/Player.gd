@@ -20,8 +20,8 @@ var burrow_speed = 16*10
 var unburrow_speed = 16*10
 
 
-export var collision_mask_normal = 1|2
-export var collision_mask_burrow = 2
+export(int, LAYERS_2D_PHYSICS) var collision_mask_normal = 0
+export(int, LAYERS_2D_PHYSICS) var collision_mask_burrow = 0
 
 export(PackedScene) var SpawnFlowersSpellScene
 
@@ -29,16 +29,23 @@ onready var UndergroundSurfaceDetector = $"%UndergroundSurfaceDetector"
 onready var OvergroundSurfaceDetector = $"%OvergroundSurfaceDetector"
 onready var PlayerSprite = $Sprite
 onready var AnimTree = $AnimationTree
+onready var Crosshair = $"%Crosshair"
 
 onready var Playback: AnimationNodeStateMachinePlayback = AnimTree.get("parameters/playback")
-
 
 export(Resource) var health
 export(Resource) var mana
 
 
 func _ready():
+	print(collision_mask_burrow)
 	OvergroundStatus.new().attach(self)
+	Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
+
+
+func _process(delta):
+	Crosshair.global_position = get_global_mouse_position()
+	Crosshair.global_rotation = lerp_angle(Crosshair.global_rotation, self.get_angle_to(Crosshair.global_position), 20*delta)
 
 
 func _physics_process(delta):
