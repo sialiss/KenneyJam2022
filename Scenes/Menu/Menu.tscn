@@ -44,9 +44,10 @@ texture = ExtResource( 4 )
 stretch_mode = 5
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
-position = Vector2( 61, 177.846 )
+position = Vector2( 52, 157 )
 scale = Vector2( 4.76923, 4.76923 )
 frames = SubResource( 3 )
+frame = 1
 playing = true
 
 [node name="StartButton" type="Button" parent="."]
